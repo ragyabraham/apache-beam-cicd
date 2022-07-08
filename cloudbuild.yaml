@@ -1,0 +1,56 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-docker-container'
+    entrypoint: 'bash'
+    args:
+    - '-c'
+    - |
+      docker build -t gcr.io/$PROJECT_ID/$_TARGET_GCR_IMAGE:$BUILD_ID \
+      --build-arg PROJECT_ID=$PROJECT_ID \
+      --build-arg IMAGE=$_TARGET_GCR_IMAGE \
+      --build-arg REGION=$_REGION \
+      --build-arg BUCKET=$_TEMPLATE_GCS_LOCATION . 
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'push-dataflow-image'
+    args: ['push', 'gcr.io/$PROJECT_ID/$_TARGET_GCR_IMAGE:$BUILD_ID']
+  # Build the Dataflow template from the previous step
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'build-dataflow-template'
+    entrypoint: 'gcloud'
+    args:
+      [
+        'dataflow',
+        'flex-template',
+        'build',
+        '$_TEMPLATE_GCS_LOCATION',
+        '--image',
+        'gcr.io/$PROJECT_ID/$_TARGET_GCR_IMAGE:$BUILD_ID',
+        '--sdk-language',
+        'PYTHON',
+        '--staging-location',
+        'gs://monita-testing-bucket/temp',
+        '--metadata-file',
+        './app/spec/metadata.json',
+      ]
+  # Runs the dataflow template in GCP
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'run-dataflow-template'
+    entrypoint: 'gcloud'
+    args:
+      [
+        'dataflow',
+        'flex-template',
+        'run',
+        '$_TARGET_GCR_IMAGE',
+        '--template-file-gcs-location',
+        '$_TEMPLATE_GCS_LOCATION',
+        '--region',
+        '$_REGION',
+        '--update',
+        '--service-account-email',
+        'dataflow-service-account@$PROJECT_ID.iam.gserviceaccount.com',
+        '--staging-location',
+        'gs://monita-testing-bucket/temp'
+      ]
+options:
+  logging: CLOUD_LOGGING_ONLY
