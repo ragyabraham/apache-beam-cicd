@@ -31,3 +31,26 @@ RUN echo "BUCKET=${BUCKET}" >> .env
 RUN echo "REGION=${REGION}" >> .env
 
 
+
+# RUN echo "++++++++++++++++++++++++++++"
+# RUN echo "=======Running Echos========"
+# RUN echo "++++++++++++++++++++++++++++"
+
+# RUN echo '----- Working directory path'
+# RUN echo ${WORKDIR}
+# RUN echo '----- Python File'
+# RUN echo ${FLEX_TEMPLATE_PYTHON_PY_FILE}
+# RUN echo '----- Python Requirements File'
+# RUN echo ${FLEX_TEMPLATE_PYTHON_REQUIREMENTS_FILE}
+# RUN echo '----- Python Setup File'
+# RUN echo ${FLEX_TEMPLATE_PYTHON_SETUP_FILE}
+# RUN echo '----- PROJECT_ID'
+# RUN echo ${PROJECT_ID}
+# RUN echo '----- ENVIRONMENT'
+# RUN echo ${ENVIRONMENT}
+
+# RUN echo '----- Listing Working Directory'
+# RUN ls -la ${WORKDIR}
+
+# RUN echo '---- Listing Modules--'
+# RUN ls -la ${WORKDIR}/modules

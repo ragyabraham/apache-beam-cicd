@@ -1,2 +1,12 @@
+google-api-python-client
+google-cloud-bigquery
+google-cloud-core
+inflection
+PyMySQL
+python-dotenv
+redis
+setuptools
+ua-parser
+user-agents
+wheel
 apache-beam[gcp]
-PyHamcrest

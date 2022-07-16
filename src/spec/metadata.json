@@ -1,0 +1,7 @@
+{
+  "name": "beam-summit-streaming-pipeline",
+  "description": "This is a pixel streaming pipeline",
+  "pyFile":"/dataflow/template/__main__.py",
+  "parameters": [
+  ]
+}
