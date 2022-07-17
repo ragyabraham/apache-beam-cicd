@@ -11,11 +11,7 @@ import logging
 def CountWords(pcoll):
     return (
         pcoll
-        # Convert lines of text into individual words.
-        | 'ExtractWords' >>
-        beam.FlatMap(lambda x: re.findall(r'[A-Za-z\']+', x))
-
-        # Count the number of times each word occurs.
+        | 'ExtractWords' >> beam.FlatMap(lambda x: re.findall(r'[A-Za-z\']+', x))
         | beam.combiners.Count.PerElement()
     )
 
@@ -29,8 +25,9 @@ class WordCountTest(unittest.TestCase):
             "hi", "sue", "", "", "ZOW", "bob", ""
         ]
         # Our output data, which is the expected data that the final PCollection must match.
-        EXPECTED_COUNTS = [('hi', 4), ('there', 1),
-                           ('sue', 2), ('bob', 2), ('ZOW', 1)]
+        EXPECTED_COUNTS = [
+            ('hi', 4), ('there', 1),
+            ('sue', 2), ('bob', 2), ('ZOW', 1)]
         with TestPipeline() as p:
             input = p | beam.Create(WORDS)
             output = input | CountWords()
