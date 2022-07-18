@@ -16,7 +16,7 @@ steps:
     args:
     - '-c'
     - |
-      python -m unittest tests/*
+      pytest tests
   - name: 'gcr.io/cloud-builders/docker'
     id: 'push-dataflow-image'
     args: ['push', 'gcr.io/$PROJECT_ID/$_TARGET_GCR_IMAGE:$BUILD_ID']
