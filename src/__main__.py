@@ -98,7 +98,7 @@ def run():
         runner=runner,
         project=PROJECT_ID,
         job_name=IMAGE,
-        update=True,
+        # update=True,
         temp_location=f'{BUCKET}/temp',
         region=REGION,
         streaming=True,
