@@ -20,6 +20,9 @@ COPY src/tests ${WORKDIR}/tests
 COPY src/wordcount.py ${WORKDIR}/wordcount.py
 COPY src/spec/metadata.json ${WORKDIR}/metadata.json
 
+# Run unit tests using Pytest library
+RUN pytest tests/* --disable-warnings
+
 ENV FLEX_TEMPLATE_PYTHON_SETUP_FILE="${WORKDIR}/setup.py"
 ENV FLEX_TEMPLATE_PYTHON_PY_FILE="${WORKDIR}/__main__.py"
 
