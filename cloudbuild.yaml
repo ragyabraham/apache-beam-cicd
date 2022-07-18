@@ -34,7 +34,7 @@ steps:
         '--staging-location',
         'gs://monita-testing-bucket/temp',
         '--metadata-file',
-        './app/spec/metadata.json',
+        './src/spec/metadata.json',
       ]
   # Runs the dataflow template in GCP
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
