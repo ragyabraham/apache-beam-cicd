@@ -10,7 +10,7 @@ RUN pip install --upgrade pip \
     && pip install --upgrade setuptools \
     && pip install --upgrade python-dotenv \
     && pip install apache-beam[gcp] \
-    && pip install hamcrest \
+    && pip install PyHamcrest \
     && pip install nose \
     && pip install pytest \
     && pip install google-cloud-secret-manager==2.0.0
