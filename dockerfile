@@ -4,7 +4,7 @@ ARG WORKDIR=/dataflow/template
 RUN mkdir -p ${WORKDIR}
 RUN mkdir -p ${WORKDIR}/modules
 WORKDIR ${WORKDIR}
-COPY app/modules ${WORKDIR}/modules
+COPY src/modules ${WORKDIR}/modules
 
 RUN pip install --upgrade pip \
     && pip install --upgrade setuptools \
@@ -14,10 +14,10 @@ RUN pip install --upgrade pip \
     && pip install unittest \
     && pip install google-cloud-secret-manager==2.0.0
 
-COPY app/__init__.py ${WORKDIR}/__init__.py
-COPY app/setup.py ${WORKDIR}/setup.py
-COPY app/__main__.py ${WORKDIR}/__main__.py
-COPY app/spec/metadata.json ${WORKDIR}/metadata.json
+COPY src/__init__.py ${WORKDIR}/__init__.py
+COPY src/setup.py ${WORKDIR}/setup.py
+COPY src/__main__.py ${WORKDIR}/__main__.py
+COPY src/spec/metadata.json ${WORKDIR}/metadata.json
 
 ENV FLEX_TEMPLATE_PYTHON_SETUP_FILE="${WORKDIR}/setup.py"
 ENV FLEX_TEMPLATE_PYTHON_PY_FILE="${WORKDIR}/__main__.py"
