@@ -11,7 +11,6 @@ RUN pip install --upgrade pip \
     && pip install --upgrade python-dotenv \
     && pip install apache-beam[gcp] \
     && pip install pytest \
-    && pip install unittest \
     && pip install google-cloud-secret-manager==2.0.0
 
 COPY src/__init__.py ${WORKDIR}/__init__.py
