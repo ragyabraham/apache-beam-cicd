@@ -16,6 +16,8 @@ RUN pip install --upgrade pip \
 COPY src/__init__.py ${WORKDIR}/__init__.py
 COPY src/setup.py ${WORKDIR}/setup.py
 COPY src/__main__.py ${WORKDIR}/__main__.py
+COPY src/tests ${WORKDIR}/tests
+COPY src/wordcount.py ${WORKDIR}/wordcount.py
 COPY src/spec/metadata.json ${WORKDIR}/metadata.json
 
 ENV FLEX_TEMPLATE_PYTHON_SETUP_FILE="${WORKDIR}/setup.py"
