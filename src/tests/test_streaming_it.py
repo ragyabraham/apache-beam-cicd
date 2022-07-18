@@ -36,7 +36,7 @@ class StreamingWordCountIT(unittest.TestCase):
     def setUp(self):
         if LOCAL == 'True':
             os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./src/keys/k8s_owner_key.json"
-        self.test_pipeline = TestPipeline(is_integration_test=False)
+        self.test_pipeline = TestPipeline(is_integration_test=True)
         self.uuid = str(uuid.uuid4())
 
         # Set up PubSub environment.
