@@ -50,7 +50,7 @@ steps:
         '$_TEMPLATE_GCS_LOCATION',
         '--region',
         '$_REGION',
-        '--update',
+        # '--update',
         '--service-account-email',
         'dataflow-service-account@$PROJECT_ID.iam.gserviceaccount.com',
         '--staging-location',
