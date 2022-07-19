@@ -29,7 +29,7 @@ load_dotenv(dotenv_path=Path('.') / '.env')
 LOCAL = os.getenv("LOCAL")
 
 DEFAULT_INPUT_NUMBERS = 500
-WAIT_UNTIL_FINISH_DURATION = 6 * 60 * 1000  # in milliseconds
+WAIT_UNTIL_FINISH_DURATION = 60 * 1000  # in milliseconds
 
 
 class StreamingWordCountIT(unittest.TestCase):
@@ -89,12 +89,14 @@ class StreamingWordCountIT(unittest.TestCase):
         extra_opts = {
             'input_subscription': self.input_sub.name,
             'output_topic': self.output_topic.name,
-            # 'wait_until_finish_duration': WAIT_UNTIL_FINISH_DURATION,
+            'wait_until_finish_duration': WAIT_UNTIL_FINISH_DURATION,
             'on_success_matcher': all_of(state_verifier, pubsub_msg_verifier)
         }
 
         # Generate input data and inject to PubSub.
         self._inject_numbers(self.input_topic, DEFAULT_INPUT_NUMBERS)
+
+        print("before decode:", extra_opts['on_success_matcher'])
 
         # Get pipeline options from command argument: --test-pipeline-options,
         # and start pipeline job by calling pipeline main function.
